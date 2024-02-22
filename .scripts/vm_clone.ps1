@@ -5,12 +5,7 @@ param(
     [string]$clonePath
 )
 
-# Change directory to where VirtualBox is installed
 cd "C:\Program Files\Oracle\VirtualBox"
-
-Write-Host "vmName: $vmName"
-Write-Host "cloneName: $cloneName"
-Write-Host "clonePath: $clonePath"
 
 # Check if any of the variables are empty
 if (-not $vmName -or -not $cloneName -or -not $clonePath) {
@@ -18,10 +13,12 @@ if (-not $vmName -or -not $cloneName -or -not $clonePath) {
     exit
 }
 
-# Clone the VM
 try {
+    # Clonnage de la machine virtuelle
     .\VBoxManage.exe clonevm "$vmName" --name "$cloneName" --register --basefolder "$clonePath"
-    Write-Host "VM cloned successfully."
-} catch {
-    Write-Host "Error cloning VM: $_"
+    
+    Write-Host "La machine virtuelle $VMName a ete cloner avec succes." -ForegroundColor Green
+} 
+catch {
+    Write-Host "Erreur : Impossible de cloner la machine virtuelle. $_" -ForegroundColor Red
 }
