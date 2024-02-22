@@ -1,12 +1,40 @@
 const { exec } = require('child_process');
 
+const express = require('express');
+const path = require('path');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Définir le répertoire statique pour les fichiers publics
+app.use(express.static(path.join(__dirname, 'assets')));
+
+// Routes
+app.get('/', (req, res) => {
+    // Envoyer le fichier index.html situé dans le répertoire _layout
+    res.sendFile(path.join(__dirname, '../_layout', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
 function vm_list() {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/.scripts/vm_start.ps1';
+    const powershellScriptPath = 'C:/wamp64/www/UniVbox/.scripts/vm_list.ps1';
     const command = `powershell.exe -File ${powershellScriptPath}`;
 
     // Execute PowerShell script with variables
-    executeCommand(command);
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing PowerShell script: ${error}`);
+        } else {
+            console.log('PowerShell script executed successfully.');
+            console.log('Output:');
+
+            const vms = stdout.trim().split('\r\n');
+            return vms.map(vm => vm.split('"')[1]);
+        }
+    });
 }
 
 function vm_create() {
@@ -88,16 +116,3 @@ function executeCommand(command) {
         }
     });
 }
-
-function unit_test() {
-    vm_list();
-    //vm_create();
-    //vm_start();
-    //vm_finish();
-    //vm_start_noDisplay();
-    vm_delete();
-    vm_list();
-}
-
-// Appeler la fonction de test unitaire
-unit_test();

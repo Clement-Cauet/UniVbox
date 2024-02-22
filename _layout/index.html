@@ -3,56 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../_sass/style.css">
+    <link rel="stylesheet" href="/_sass/style.css">
 </head>
 <body>
 
 <div class="header">
     <div class="header">
-        <img src="../assets/img/logo.png" alt="Image de Premier Plan" class="foreground-image">
+        <img src="/img/logo.png" alt="Image de Premier Plan" class="foreground-image">
         <h1></h1>
     </div>
 </div>
 
 <div class="nav">
-    <a href="#home">Accueil</a>
-    <a href="#news">Nouvelles</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">À propos</a>
+    <a id="">Nouvelle</a>
 </div>
 
 <div class="main">
-    <h2>Uploader un fichier OVA</h2>
-    <form action="upload_ova.php" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            Sélectionnez un fichier OVA à uploader :
-            <input type="file" name="fileToUpload" id="fileToUpload">
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Upload OVA" name="submit">
-        </div>
-    </form>
-</div>
+    <table id="vm_list">
 
-
-<div class="main">
-    <h2>Dupliquer une VM</h2>
-    <p>Ceci va vous permettre de dupliquer une VM existante sur Virtual Box</p>
-    
-    <form action="dupliquer_vm.php" method="post">
-        <div class="form-group">
-            <label for="vmSelect">Sélectionnez la VM à dupliquer :</label>
-            <select name="vm" id="vmSelect" class="form-control">
-                <option value="vm1">VM 1</option>
-                <option value="vm2">VM 2</option>
-                <option value="vm3">VM 3</option>
-                <!-- Ajoutez plus d'options selon les VMs disponibles -->
-            </select>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Dupliquer VM">
-        </div>
-    </form>
+    </table>
 </div>
 
 <div class="footer">
