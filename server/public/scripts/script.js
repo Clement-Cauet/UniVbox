@@ -17,7 +17,7 @@ function refreshVMList() {
                 divVM.appendChild(divButton);
 
                 const cloneButton = document.createElement('button');
-                cloneButton.textContent = 'Cloner';
+                cloneButton.innerHTML = '<i class="fas fa-clone"></i> Cloner';
                 cloneButton.onclick = function() {
                     document.getElementById('form_clone').style.display = 'block';
                     document.getElementById('cloneButton').addEventListener('click', function() {
@@ -37,7 +37,7 @@ function refreshVMList() {
                 divButton.appendChild(cloneButton);
 
                 const startButtonNormal = document.createElement('button');
-                startButtonNormal.textContent = 'Démarrage Normal';
+                startButtonNormal.innerHTML = '<i class="fas fa-play"></i> Démarrage Normal';
                 startButtonNormal.onclick = function() {
                     fetch('/vm-start?vmName=' + vm)
                         .then(response => response.json())
@@ -49,7 +49,7 @@ function refreshVMList() {
                 divButton.appendChild(startButtonNormal);
 
                 const startButtonNoDisplay = document.createElement('button');
-                startButtonNoDisplay.textContent = 'Démarrage sans affichage';
+                startButtonNoDisplay.innerHTML = '<i class="fas fa-tv"></i> Démarrage sans affichage';
                 startButtonNoDisplay.onclick = function() {
                     fetch('/vm-start-noDisplay?vmName=' + vm)
                         .then(response => response.json())
@@ -61,7 +61,7 @@ function refreshVMList() {
                 divButton.appendChild(startButtonNoDisplay);
 
                 const finishButton = document.createElement('button');
-                finishButton.textContent = 'Eteindre';
+                finishButton.innerHTML = '<i class="fas fa-power-off"></i> Éteindre';
                 finishButton.onclick = function() {
                     fetch('/vm-finish?vmName=' + vm)
                         .then(response => response.json())
@@ -73,7 +73,7 @@ function refreshVMList() {
                 divButton.appendChild(finishButton);
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Supprimer';
+                deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Supprimer';
                 deleteButton.onclick = function() {
                     fetch('/vm-delete?vmName=' + vm)
                         .then(response => response.json())

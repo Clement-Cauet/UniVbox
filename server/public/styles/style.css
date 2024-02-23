@@ -108,3 +108,52 @@ input[type="submit"]:hover {
     gap: 10px;
     width: 400px;
 }
+
+/* Style général des boutons */
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1068A0; /* Couleur de fond initiale */
+    color: white; /* Couleur du texte */
+    padding: 10px 15px; /* Espacement intérieur */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Bordures arrondies */
+    cursor: pointer; /* Curseur en forme de main */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour le survol et l'ombre */
+    font-weight: bold; /* Texte en gras */
+    margin: 5px; /* Marge autour des boutons */
+}
+
+button:hover {
+    background-color: #0D5C86; /* Couleur de fond au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre portée pour un effet de "soulèvement" */
+}
+
+button:active {
+    background-color: #0A4661; /* Couleur de fond lors du clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre plus petite pour l'effet de pression */
+}
+
+/* Amélioration de l'espacement et de l'alignement des boutons */
+.vm-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligner les éléments à gauche */
+    padding: 15px; /* Plus d'espacement intérieur */
+    margin-bottom: 15px; /* Marge au bas de chaque vm-item */
+    background: #ffffff; /* Fond blanc pour contraster avec l'arrière-plan de la page */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour la distinction */
+    border-radius: 5px; /* Bordures arrondies */
+}
+
+/* Styles pour les boutons inactifs ou désactivés */
+button[disabled] {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed; /* Curseur indiquant que le bouton est désactivé */
+}
+
+button i {
+    margin-right: 8px; /* Espace entre l'icône et le texte */
+}
