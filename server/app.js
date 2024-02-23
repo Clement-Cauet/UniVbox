@@ -29,8 +29,10 @@ app.get('/vm-list', (req, res) => {
 });
 
 app.get('/vm-clone', (req, res) => {
-    const vmName = req.query.vmName;
-    vm_clone(vmName, (message) => {
+    const vmName    = req.query.vmName;
+    const cloneName = req.query.cloneName;
+    const clonePath = req.query.clonePath;
+    vm_clone(vmName, cloneName, clonePath, (message) => {
         // Renvoyer les données en tant que JSON
         console.log(message);
         res.json({ message });
@@ -38,7 +40,13 @@ app.get('/vm-clone', (req, res) => {
 });
 
 app.get('/vm-create', (req, res) => {
-    vm_create((message) => {
+    const vmName        = req.query.vmName;
+    const vmPath        = req.query.vmPath;
+    const osType        = req.query.osType;
+    const ramSize       = req.query.ramSize;
+    const vramSize      = req.query.vramSize;
+    const storageSize   = req.query.storageSize;
+    vm_create(vmName, vmPath, osType, ramSize, vramSize, storageSize, (message) => {
         // Renvoyer les données en tant que JSON
         console.log(message);
         res.json({ message });
@@ -105,15 +113,15 @@ function vm_list(callback) {
     });
 }
 
-function vm_create(callback) {
+function vm_create(vmName, vmPath, osType, ramSize, vramSize, storageSize, callback) {
     // Define the PowerShell script path
     const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_create.ps1';
-    const vmName = 'UbuntuTest-18.04';
+    /*const vmName = 'UbuntuTest-18.04';
     const vmPath = 'C:/Users/Clement/VirtualBox VMs/Virtual Machine';
     const osType = 'Ubuntu';
     const ramSize = 2048;
     const vramSize = 128;
-    const storageSize = 20000;
+    const storageSize = 20000;*/
 
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName} -vmPath ${vmPath} -osType ${osType} -ramSize ${ramSize} -vramSize ${vramSize} -storageSize ${storageSize}`;
 
@@ -157,11 +165,11 @@ function vm_start_noDisplay(vmName, callback) {
     executeCommand(callback, command);
 }
 
-function vm_clone(vmName, callback) {
+function vm_clone(vmName, cloneName, clonePath, callback) {
     // Define the PowerShell script path
     const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_clone.ps1';
-    const cloneName = 'UbuntuTest-18.04_Cloned';
-    const clonePath = 'C:/Users/Clement/VirtualBox VMs/Virtual Machine';
+    //const cloneName = 'UbuntuTest-18.04_Cloned';
+    //const clonePath = 'C:/Users/Clement/VirtualBox VMs/Virtual Machine';
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName} -cloneName ${cloneName} -clonePath ${clonePath}`;
 
     // Execute PowerShell script with variables

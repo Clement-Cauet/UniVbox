@@ -19,11 +19,15 @@ function refreshVMList() {
                 cloneButton.onclick = function() {
                     document.getElementById('form_clone').style.display = 'block';
                     document.getElementById('cloneButton').addEventListener('click', function() {
-                        fetch('/vm-clone?vmName=' + vm)
+                        const cloneName = document.getElementById('cloneNameInput').value;
+                        const clonePath = document.getElementById('clonePathInput').value;
+                        
+                        fetch('/vm-clone?vmName=' + vm + '&cloneName=' + cloneName + '&clonePath=' + clonePath)
                         .then(response => response.json())
                         .then(data => {
                             console.log(data);
                             alert(data.message);
+                            document.getElementById('form_clone').style.display = 'none';
                             refreshVMList();
                         });
                     });
@@ -89,12 +93,23 @@ window.onload = function() {
 };
 
 document.getElementById('vm_create').addEventListener('click', function() {
-    fetch('/vm-create')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        alert(data.message);
-        refreshVMList();
+    document.getElementById('form_create').style.display = 'block';
+    document.getElementById('createButton').addEventListener('click', function() {
+        const vmName = document.getElementById('createNameInput').value;
+        const vmPath = document.getElementById('createPathInput').value;
+        const osType = document.getElementById('createOsTypeInput').value;
+        const ramSize = document.getElementById('createRamSizeInput').value;
+        const vramSize = document.getElementById('createVramSizeInput').value;
+        const storageSize = document.getElementById('createStorageSizeInput').value;
+        
+        fetch('/vm-create?vmName=' + vmName + '&vmPath=' + vmPath + '&osType=' + osType + 'ramSize=' + ramSize + '&vramSize=' + vramSize + '&storageSize=' + storageSize)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert(data.message);
+            document.getElementById('form_create').style.display = 'none';
+            refreshVMList();
+        });
     });
 });
 

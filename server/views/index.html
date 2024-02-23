@@ -20,13 +20,17 @@
 
         <div id="form_create">
             <input type="text" id="createNameInput" placeholder="Nom du create">
-            <input type="file" id="createPathInput" webkitdirectory directory multiple>
+            <input type="text" id="createPathInput" placeholder="Nom du path" value="C:\Users\Clement\VirtualBox VMs\Virtual Machine">
+            <input type="text" id="createOsTypeInput" placeholder="Nom du osType" value="Ubuntu">
+            <input type="text" id="createRamSizeInput" placeholder="ramSize" value="2048">
+            <input type="text" id="createVramSizeInput" placeholder="vramSize" value="128">
+            <input type="text" id="createStorageSizeInput" placeholder="storageSize" value="20000">
             <button id="createButton">Valider</button>
         </div>
 
         <div id="form_clone">
             <input type="text" id="cloneNameInput" placeholder="Nom du clone">
-            <input type="file" id="clonePathInput" webkitdirectory directory multiple>
+            <input type="text" id="clonePathInput" placeholder="Nom du path" value="C:\Users\Clement\VirtualBox VMs\Virtual Machine">
             <button id="cloneButton">Valider</button>
         </div>
 
