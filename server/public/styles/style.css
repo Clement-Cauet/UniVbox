@@ -37,7 +37,7 @@ body {
 
 
 .nav {
-    background-color: #333;
+    background-color: hsl(0, 0%, 41%);
     overflow: hidden;
 }
 .nav a {
@@ -49,7 +49,7 @@ body {
     text-decoration: none;
 }
 .nav a:hover {
-    background-color: #ddd;
+    background-color: hsl(0, 0%, 35%);
     color: black;
 }
 .main {
@@ -89,4 +89,22 @@ input[type="submit"]:hover {
 .form-group input {
     width: calc(100% - 48px); /* Ajuste la largeur pour être responsive */
     margin-top: 8px; /* Espacement supérieur */
+}
+
+#vm_list {
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    gap: 10px; 
+    flex-wrap: wrap;
+}
+
+.vm-item {
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
 }

@@ -3,16 +3,18 @@ function refreshVMList() {
     fetch('/vm-list')
         .then(response => response.json())
         .then(data => {
-            const table = document.getElementById('vm_list');
-            table.innerHTML = '';
+            let holder = document.getElementById('vm_list');
+            holder.innerHTML = '';
 
             data.vms.forEach(vm => {
-                const row = table.insertRow();
-                
-                const nameCell = row.insertCell();
-                nameCell.textContent = vm;
 
-                const buttonCell = row.insertCell();
+                let divVM = document.createElement("div");
+                let divButton = document.createElement("div");
+
+                divVM.textContent = vm;
+                divVM.classList.add('vm-item');
+                holder.appendChild(divVM);
+                divVM.appendChild(divButton);
 
                 const cloneButton = document.createElement('button');
                 cloneButton.textContent = 'Cloner';
@@ -32,7 +34,7 @@ function refreshVMList() {
                         });
                     });
                 };
-                buttonCell.appendChild(cloneButton);
+                divButton.appendChild(cloneButton);
 
                 const startButtonNormal = document.createElement('button');
                 startButtonNormal.textContent = 'Démarrage Normal';
@@ -44,7 +46,7 @@ function refreshVMList() {
                             alert(data.message);
                         });
                 };
-                buttonCell.appendChild(startButtonNormal);
+                divButton.appendChild(startButtonNormal);
 
                 const startButtonNoDisplay = document.createElement('button');
                 startButtonNoDisplay.textContent = 'Démarrage sans affichage';
@@ -56,7 +58,7 @@ function refreshVMList() {
                             alert(data.message);
                         });
                 };
-                buttonCell.appendChild(startButtonNoDisplay);
+                divButton.appendChild(startButtonNoDisplay);
 
                 const finishButton = document.createElement('button');
                 finishButton.textContent = 'Eteindre';
@@ -68,7 +70,7 @@ function refreshVMList() {
                             alert(data.message);
                         });
                 };
-                buttonCell.appendChild(finishButton);
+                divButton.appendChild(finishButton);
 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Supprimer';
@@ -81,7 +83,7 @@ function refreshVMList() {
                             refreshVMList();
                         });
                 };
-                buttonCell.appendChild(deleteButton);
+                divButton.appendChild(deleteButton);
             });
         })
         .catch(error => console.error('Error:', error));
