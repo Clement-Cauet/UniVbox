@@ -1,23 +1,103 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const vmListTable = document.getElementById('vm_list');
+// Fonction pour rafraîchir le tableau des machines virtuelles
+function refreshVMList() {
+    fetch('/vm-list')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('vm_list');
+            table.innerHTML = '';
 
-    // Fonction pour récupérer la liste des machines virtuelles depuis le serveur Node.js
-    function fetchVMs() {
-        fetch('/vms')
-            .then(response => response.json())
-            .then(vmNames => {
-                // Insertion des noms des machines virtuelles dans le tableau HTML
-                vmNames.forEach(vmName => {
-                    const row = document.createElement('tr');
-                    const cell = document.createElement('td');
-                    cell.textContent = vmName;
-                    row.appendChild(cell);
-                    vmListTable.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Erreur lors de la récupération des machines virtuelles :', error));
-    }
+            data.vms.forEach(vm => {
+                const row = table.insertRow();
+                
+                const nameCell = row.insertCell();
+                nameCell.textContent = vm;
 
-    // Appel de la fonction pour récupérer les machines virtuelles lors du chargement de la page
-    fetchVMs();
+                const buttonCell = row.insertCell();
+
+                const cloneButton = document.createElement('button');
+                cloneButton.textContent = 'Cloner';
+                cloneButton.onclick = function() {
+                    document.getElementById('form_clone').style.display = 'block';
+                    document.getElementById('cloneButton').addEventListener('click', function() {
+                        fetch('/vm-clone?vmName=' + vm)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            alert(data.message);
+                            refreshVMList();
+                        });
+                    });
+                };
+                buttonCell.appendChild(cloneButton);
+
+                const startButtonNormal = document.createElement('button');
+                startButtonNormal.textContent = 'Démarrage Normal';
+                startButtonNormal.onclick = function() {
+                    fetch('/vm-start?vmName=' + vm)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            alert(data.message);
+                        });
+                };
+                buttonCell.appendChild(startButtonNormal);
+
+                const startButtonNoDisplay = document.createElement('button');
+                startButtonNoDisplay.textContent = 'Démarrage sans affichage';
+                startButtonNoDisplay.onclick = function() {
+                    fetch('/vm-start-noDisplay?vmName=' + vm)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            alert(data.message);
+                        });
+                };
+                buttonCell.appendChild(startButtonNoDisplay);
+
+                const finishButton = document.createElement('button');
+                finishButton.textContent = 'Eteindre';
+                finishButton.onclick = function() {
+                    fetch('/vm-finish?vmName=' + vm)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            alert(data.message);
+                        });
+                };
+                buttonCell.appendChild(finishButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.onclick = function() {
+                    fetch('/vm-delete?vmName=' + vm)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            alert(data.message);
+                            refreshVMList();
+                        });
+                };
+                buttonCell.appendChild(deleteButton);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Appeler la fonction de rafraîchissement lorsque la page est chargée
+window.onload = function() {
+    refreshVMList();
+};
+
+document.getElementById('vm_create').addEventListener('click', function() {
+    fetch('/vm-create')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        alert(data.message);
+        refreshVMList();
+    });
 });
+
+
+document.getElementById('form_create').style.display = 'none';
+document.getElementById('form_clone').style.display = 'none';

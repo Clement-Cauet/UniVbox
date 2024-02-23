@@ -10,7 +10,7 @@ body {
     color: #ffffff;
     padding: 26px;
     text-align: center;
-    background-image: url('../assets/img/Background.jpg'); /* Chemin vers votre image */
+    background-image: url('/images/Background.jpg'); /* Chemin vers votre image */
     background-size: cover; /* S'assure que l'image couvre entièrement l'espace disponible */
     background-position: center; /* Centre l'image dans l'élément */
 }

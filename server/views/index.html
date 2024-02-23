@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/_sass/style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles/style.css">
+    </head>
+    <body>
 
-<div class="header">
-    <div class="header">
-        <img src="/img/logo.png" alt="Image de Premier Plan" class="foreground-image">
-        <h1></h1>
-    </div>
-</div>
+        <div class="header">
+            <div class="header">
+                <img src="/images/logo.png" alt="Image de Premier Plan" class="foreground-image">
+                <h1></h1>
+            </div>
+        </div>
 
-<div class="nav">
-    <a id="">Nouvelle</a>
-</div>
+        <div class="nav">
+            <a id="vm_create">Nouvelle</a>
+        </div>
 
-<div class="main">
-    <table id="vm_list">
+        <div id="form_create">
+            <input type="text" id="createNameInput" placeholder="Nom du create">
+            <input type="file" id="createPathInput" webkitdirectory directory multiple>
+            <button id="createButton">Valider</button>
+        </div>
 
-    </table>
-</div>
+        <div id="form_clone">
+            <input type="text" id="cloneNameInput" placeholder="Nom du clone">
+            <input type="file" id="clonePathInput" webkitdirectory directory multiple>
+            <button id="cloneButton">Valider</button>
+        </div>
 
-<div class="footer">
-    <p>UniVbox © 2024</p>
-</div>
+        <div class="main">
+            <table id="vm_list">
 
-</body>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>UniVbox © 2024</p>
+        </div>
+
+        <script src="/scripts/script.js"></script>
+    </body>
 </html>
