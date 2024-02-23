@@ -29,6 +29,23 @@ app.get('/vm-list', (req, res) => {
     });
 });
 
+app.get('/vm-status-vm', (req, res) => {
+    const vmName = req.query.vmName;
+    vm_status_vm(vmName, (vms) => {
+        // Renvoyer les données en tant que JSON
+        console.log(vms);
+        res.json({ vms });
+    });
+});
+
+app.get('/vm-status-all-vm', (req, res) => {
+    vm_status_all_vm((vms) => {
+        // Renvoyer les données en tant que JSON
+        console.log(vms);
+        res.json({ vms });
+    });
+});
+
 app.get('/vm-clone', (req, res) => {
     const vmName    = req.query.vmName;
     const cloneName = req.query.cloneName;
@@ -97,6 +114,44 @@ app.listen(PORT, () => {
 function vm_list(callback) {
     // Define the PowerShell script path
     const powershellScriptPath = path.join(psScriptsDir, 'vm_list.ps1');
+    const command = `powershell.exe -File ${powershellScriptPath}`;
+
+    // Execute PowerShell script with variables
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing PowerShell script: ${error}`);
+            callback([]);
+        } else {
+            console.log('PowerShell script executed successfully.');
+
+            const vms = stdout.trim().split('\r\n').map(vm => vm.split('"')[1]);
+
+            callback(vms);
+        }
+    });
+}
+
+function vm_status_vm(vmName, callback) {
+    // Define the PowerShell script path
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_status_vm.ps1');
+    const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName}`;
+
+    // Execute PowerShell script with variables
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing PowerShell script: ${error}`);
+            callback([]);
+        } else {
+            console.log('PowerShell script executed successfully.');
+
+            callback(stdout.replace(/[\r\n]/g, ''));
+        }
+    });
+}
+
+function vm_status_all_vm(callback) {
+    // Define the PowerShell script path
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_status_all_vm.ps1');
     const command = `powershell.exe -File ${powershellScriptPath}`;
 
     // Execute PowerShell script with variables

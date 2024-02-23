@@ -109,6 +109,25 @@ input[type="submit"]:hover {
     width: 400px;
 }
 
+#form_create, #form_clone {
+    padding: 10px;
+    border: solid 1px black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    margin: 10px auto;
+}
+
+#form_create input,
+#form_clone input {
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px 0;
+}
+
 /* Style général des boutons */
 button {
     display: inline-flex;

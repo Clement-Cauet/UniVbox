@@ -89,6 +89,25 @@ function refreshVMList() {
         .catch(error => console.error('Error:', error));
 }
 
+function verifyVMStatus(vmName) {
+    fetch('/vm-status-vm?vmName=' + vmName)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.vms);
+            return data.vms;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function verifyAllVMStatus() {
+    fetch('/vm-status-all-vm')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 // Appeler la fonction de rafraîchissement lorsque la page est chargée
 window.onload = function() {
     refreshVMList();
