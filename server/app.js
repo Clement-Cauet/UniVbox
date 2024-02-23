@@ -13,6 +13,7 @@ module.exports = {
 [ "public" ].forEach(dir => {
     app.use(express.static(path.join(__dirname, dir)));
 } );
+const psScriptsDir = path.join(__dirname, '../ps_scripts');
 
 // Routes
 app.get('/', (req, res) => {
@@ -95,7 +96,7 @@ app.listen(PORT, () => {
 
 function vm_list(callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_list.ps1';
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_list.ps1');
     const command = `powershell.exe -File ${powershellScriptPath}`;
 
     // Execute PowerShell script with variables
@@ -115,14 +116,7 @@ function vm_list(callback) {
 
 function vm_create(vmName, vmPath, osType, ramSize, vramSize, storageSize, callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_create.ps1';
-    /*const vmName = 'UbuntuTest-18.04';
-    const vmPath = 'C:/Users/Clement/VirtualBox VMs/Virtual Machine';
-    const osType = 'Ubuntu';
-    const ramSize = 2048;
-    const vramSize = 128;
-    const storageSize = 20000;*/
-
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_create.ps1');
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName} -vmPath ${vmPath} -osType ${osType} -ramSize ${ramSize} -vramSize ${vramSize} -storageSize ${storageSize}`;
 
     // Execute PowerShell script with variables
@@ -131,7 +125,7 @@ function vm_create(vmName, vmPath, osType, ramSize, vramSize, storageSize, callb
 
 function vm_delete(vmName, callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_delete.ps1';
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_delete.ps1');
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName}`;
 
     // Execute PowerShell script with variables
@@ -140,7 +134,7 @@ function vm_delete(vmName, callback) {
 
 function vm_start(vmName, callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_start.ps1';
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_start.ps1');
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName}`;
 
     // Execute PowerShell script with variables
@@ -149,7 +143,7 @@ function vm_start(vmName, callback) {
 
 function vm_finish(vmName, callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_finish.ps1';
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_finish.ps1');
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName}`;
 
     // Execute PowerShell script with variables
@@ -158,7 +152,7 @@ function vm_finish(vmName, callback) {
 
 function vm_start_noDisplay(vmName, callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_start_noDisplay.ps1';
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_start_noDisplay.ps1');
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName}`;
 
     // Execute PowerShell script with variables
@@ -167,9 +161,7 @@ function vm_start_noDisplay(vmName, callback) {
 
 function vm_clone(vmName, cloneName, clonePath, callback) {
     // Define the PowerShell script path
-    const powershellScriptPath = 'C:/wamp64/www/UniVbox/ps_scripts/vm_clone.ps1';
-    //const cloneName = 'UbuntuTest-18.04_Cloned';
-    //const clonePath = 'C:/Users/Clement/VirtualBox VMs/Virtual Machine';
+    const powershellScriptPath = path.join(psScriptsDir, 'vm_clone.ps1');
     const command = `powershell.exe -File ${powershellScriptPath} -vmName ${vmName} -cloneName ${cloneName} -clonePath ${clonePath}`;
 
     // Execute PowerShell script with variables
