@@ -12,6 +12,7 @@ UniVbox est une application web en JavaScript et Node.js permettant la gestion d
 - **Clonage de VM** : Dupliquez des environnements pour des tests rapides.
 - **Lancement de VM** : Lancez des VM facilement en mode affichage ou non.
 - **Interface web intuitive** : Gérez les VM depuis un navigateur sans passer par VirtualBox GUI.
+![image](https://github.com/user-attachments/assets/610f21ab-d3e5-4348-8cbc-7d7e3d725134)
 
 ## Prérequis
 - VirtualBox installé
@@ -30,7 +31,7 @@ npm install
 ```
 - Lancer l'application
 ```bash
-npm start
+node ./server/app.js
 ```
 
 ## Technologies utilisées
